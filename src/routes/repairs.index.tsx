@@ -6,7 +6,7 @@ import { CtaPair } from "@/components/site/Cta";
 import { Card } from "@/components/site/Cards";
 import { repairPages, REPAIR_AVAILABILITY_NOTE, APU_NOTE } from "@/data/services";
 
-export const Route = createFileRoute("/repairs")({
+export const Route = createFileRoute("/repairs/")({
   head: () => ({
     meta: [
       { title: "PS5 Repairs UAE | HDMI, No Power, Board-Level & More" },
