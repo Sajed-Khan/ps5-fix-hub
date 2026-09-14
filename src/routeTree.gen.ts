@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as RecentRepairsRouteImport } from './routes/recent-repairs'
+import { Route as RepairsIndexRouteImport } from './routes/repairs.index'
+import { Route as RepairsSlugRouteImport } from './routes/repairs.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecentRepairsRoute = RecentRepairsRouteImport.update({
+  id: '/recent-repairs',
+  path: '/recent-repairs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RepairsIndexRoute = RepairsIndexRouteImport.update({
+  id: '/repairs/',
+  path: '/repairs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RepairsSlugRoute = RepairsSlugRouteImport.update({
+  id: '/repairs/$slug',
+  path: '/repairs/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/faq': typeof FaqRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/recent-repairs': typeof RecentRepairsRoute
+  '/repairs/$slug': typeof RepairsSlugRoute
+  '/repairs/': typeof RepairsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/faq': typeof FaqRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/recent-repairs': typeof RecentRepairsRoute
+  '/repairs/$slug': typeof RepairsSlugRoute
+  '/repairs': typeof RepairsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/faq': typeof FaqRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/recent-repairs': typeof RecentRepairsRoute
+  '/repairs/$slug': typeof RepairsSlugRoute
+  '/repairs/': typeof RepairsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/faq'
+    | '/how-it-works'
+    | '/recent-repairs'
+    | '/repairs/$slug'
+    | '/repairs/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/faq'
+    | '/how-it-works'
+    | '/recent-repairs'
+    | '/repairs/$slug'
+    | '/repairs'
+  id:
+    | '__root__'
+    | '/'
+    | '/faq'
+    | '/how-it-works'
+    | '/recent-repairs'
+    | '/repairs/$slug'
+    | '/repairs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FaqRoute: typeof FaqRoute
+  HowItWorksRoute: typeof HowItWorksRoute
+  RecentRepairsRoute: typeof RecentRepairsRoute
+  RepairsSlugRoute: typeof RepairsSlugRoute
+  RepairsIndexRoute: typeof RepairsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recent-repairs': {
+      id: '/recent-repairs'
+      path: '/recent-repairs'
+      fullPath: '/recent-repairs'
+      preLoaderRoute: typeof RecentRepairsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/repairs/': {
+      id: '/repairs/'
+      path: '/repairs'
+      fullPath: '/repairs/'
+      preLoaderRoute: typeof RepairsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/repairs/$slug': {
+      id: '/repairs/$slug'
+      path: '/repairs/$slug'
+      fullPath: '/repairs/$slug'
+      preLoaderRoute: typeof RepairsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FaqRoute: FaqRoute,
+  HowItWorksRoute: HowItWorksRoute,
+  RecentRepairsRoute: RecentRepairsRoute,
+  RepairsSlugRoute: RepairsSlugRoute,
+  RepairsIndexRoute: RepairsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
