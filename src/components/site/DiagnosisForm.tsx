@@ -25,13 +25,16 @@ const labelClass = "mb-2 block text-sm font-medium";
  * Collects the fault details and hands them to WhatsApp as a ready-written
  * message. Nothing is stored on the site.
  */
-export function DiagnosisForm({ initialProblem }: { initialProblem?: string }) {
+export function DiagnosisForm({
+  initialProblem,
+}: {
+  initialProblem?: string | undefined;
+}) {
   const [values, setValues] = useState({
     name: "",
     phone: "",
     model: models[0],
-    problem:
-      problems.find((p) => p.id === initialProblem)?.title ?? problems[0].title,
+    problem: problems.find((p) => p.id === initialProblem)?.title ?? "Other Problem",
     turnsOn: yesNoUnsure[0],
     display: yesNoUnsure[0],
     previouslyRepaired: yesNoUnsure[1],

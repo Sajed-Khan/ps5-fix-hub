@@ -10,15 +10,29 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DiagnosisRouteImport } from './routes/diagnosis'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RecentRepairsRouteImport } from './routes/recent-repairs'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as RepairsIndexRouteImport } from './routes/repairs.index'
 import { Route as RepairsSlugRouteImport } from './routes/repairs.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiagnosisRoute = DiagnosisRouteImport.update({
+  id: '/diagnosis',
+  path: '/diagnosis',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -31,9 +45,19 @@ const HowItWorksRoute = HowItWorksRouteImport.update({
   path: '/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RecentRepairsRoute = RecentRepairsRouteImport.update({
   id: '/recent-repairs',
   path: '/recent-repairs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RepairsIndexRoute = RepairsIndexRouteImport.update({
@@ -49,26 +73,38 @@ const RepairsSlugRoute = RepairsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/diagnosis': typeof DiagnosisRoute
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/privacy': typeof PrivacyRoute
   '/recent-repairs': typeof RecentRepairsRoute
+  '/terms': typeof TermsRoute
   '/repairs/$slug': typeof RepairsSlugRoute
   '/repairs/': typeof RepairsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/diagnosis': typeof DiagnosisRoute
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/privacy': typeof PrivacyRoute
   '/recent-repairs': typeof RecentRepairsRoute
+  '/terms': typeof TermsRoute
   '/repairs/$slug': typeof RepairsSlugRoute
   '/repairs': typeof RepairsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/diagnosis': typeof DiagnosisRoute
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/privacy': typeof PrivacyRoute
   '/recent-repairs': typeof RecentRepairsRoute
+  '/terms': typeof TermsRoute
   '/repairs/$slug': typeof RepairsSlugRoute
   '/repairs/': typeof RepairsIndexRoute
 }
@@ -76,34 +112,50 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/contact'
+    | '/diagnosis'
     | '/faq'
     | '/how-it-works'
+    | '/privacy'
     | '/recent-repairs'
+    | '/terms'
     | '/repairs/$slug'
     | '/repairs/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/contact'
+    | '/diagnosis'
     | '/faq'
     | '/how-it-works'
+    | '/privacy'
     | '/recent-repairs'
+    | '/terms'
     | '/repairs/$slug'
     | '/repairs'
   id:
     | '__root__'
     | '/'
+    | '/contact'
+    | '/diagnosis'
     | '/faq'
     | '/how-it-works'
+    | '/privacy'
     | '/recent-repairs'
+    | '/terms'
     | '/repairs/$slug'
     | '/repairs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactRoute: typeof ContactRoute
+  DiagnosisRoute: typeof DiagnosisRoute
   FaqRoute: typeof FaqRoute
   HowItWorksRoute: typeof HowItWorksRoute
+  PrivacyRoute: typeof PrivacyRoute
   RecentRepairsRoute: typeof RecentRepairsRoute
+  TermsRoute: typeof TermsRoute
   RepairsSlugRoute: typeof RepairsSlugRoute
   RepairsIndexRoute: typeof RepairsIndexRoute
 }
@@ -115,6 +167,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diagnosis': {
+      id: '/diagnosis'
+      path: '/diagnosis'
+      fullPath: '/diagnosis'
+      preLoaderRoute: typeof DiagnosisRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -131,11 +197,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HowItWorksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/recent-repairs': {
       id: '/recent-repairs'
       path: '/recent-repairs'
       fullPath: '/recent-repairs'
       preLoaderRoute: typeof RecentRepairsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/repairs/': {
@@ -157,9 +237,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactRoute: ContactRoute,
+  DiagnosisRoute: DiagnosisRoute,
   FaqRoute: FaqRoute,
   HowItWorksRoute: HowItWorksRoute,
+  PrivacyRoute: PrivacyRoute,
   RecentRepairsRoute: RecentRepairsRoute,
+  TermsRoute: TermsRoute,
   RepairsSlugRoute: RepairsSlugRoute,
   RepairsIndexRoute: RepairsIndexRoute,
 }
