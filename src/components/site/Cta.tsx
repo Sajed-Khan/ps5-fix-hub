@@ -22,11 +22,11 @@ export function DiagnosisButton({
   className,
   source,
 }: {
-  label?: string;
-  problemId?: string;
-  size?: Size;
-  className?: string;
-  source?: string;
+  label?: string | undefined;
+  problemId?: string | undefined;
+  size?: Size | undefined;
+  className?: string | undefined;
+  source?: string | undefined;
 }) {
   return (
     <Link
@@ -54,11 +54,11 @@ export function WhatsAppButton({
   className,
   source,
 }: {
-  label?: string;
-  problemLabel?: string;
-  size?: Size;
-  className?: string;
-  source?: string;
+  label?: string | undefined;
+  problemLabel?: string | undefined;
+  size?: Size | undefined;
+  className?: string | undefined;
+  source?: string | undefined;
 }) {
   return (
     <a
@@ -89,13 +89,13 @@ export function CtaPair({
   primaryLabel,
   secondaryLabel,
 }: {
-  problemId?: string;
-  problemLabel?: string;
-  size?: Size;
-  className?: string;
-  source?: string;
-  primaryLabel?: string;
-  secondaryLabel?: string;
+  problemId?: string | undefined;
+  problemLabel?: string | undefined;
+  size?: Size | undefined;
+  className?: string | undefined;
+  source?: string | undefined;
+  primaryLabel?: string | undefined;
+  secondaryLabel?: string | undefined;
 }) {
   return (
     <div className={cn("flex flex-col gap-3 sm:flex-row", className)}>

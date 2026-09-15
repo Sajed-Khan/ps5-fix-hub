@@ -7,11 +7,11 @@ import { DiagnosisForm } from "@/components/site/DiagnosisForm";
 import { findProblem } from "@/data/problems";
 import { serviceAreaSentence } from "@/config/business";
 
-type DiagnosisSearch = { problem?: string };
+type DiagnosisSearch = { problem?: string | undefined };
 
 export const Route = createFileRoute("/diagnosis")({
   validateSearch: (search: Record<string, unknown>): DiagnosisSearch => ({
-    problem: typeof search.problem === "string" ? search.problem : undefined,
+    problem: typeof search['problem'] === "string" ? (search['problem'] as string) : undefined,
   }),
   head: () => ({
     meta: [
