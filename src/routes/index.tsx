@@ -108,8 +108,8 @@ function Home() {
       <section className="border-border relative overflow-hidden border-b bg-card/25">
         <div className="pointer-events-none absolute inset-0 circuit-bg opacity-60" />
         <Container className="max-w-7xl py-4 sm:py-7 lg:py-9">
-          <div className="border-border bg-card relative grid min-h-[540px] overflow-hidden rounded-2xl border shadow-2xl lg:grid-cols-12">
-            <div className="relative z-10 flex flex-col justify-center px-6 py-10 sm:px-10 lg:col-span-7 lg:px-14 lg:py-14">
+          <div className="border-border bg-card relative grid min-h-[590px] overflow-hidden rounded-2xl border shadow-2xl lg:min-h-[540px] lg:grid-cols-12">
+            <div className="from-card via-card/95 relative z-10 flex flex-col justify-center bg-gradient-to-r to-card/55 px-6 py-8 sm:px-10 lg:col-span-7 lg:px-14 lg:py-14">
               <p className="border-primary/25 bg-primary/10 text-primary mb-6 inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold uppercase">
                 <span className="bg-primary size-2 rounded-full" aria-hidden="true" />
                 Independent PS5 repair — UAE
@@ -117,12 +117,12 @@ function Home() {
               <h1 className="max-w-3xl text-4xl font-bold leading-[1.04] text-balance sm:text-5xl lg:text-6xl">
                 PS5 repair service <span className="text-primary">in the UAE.</span>
               </h1>
-              <p className="text-muted-foreground mt-5 max-w-xl text-base leading-relaxed sm:text-lg">
+              <p className="text-muted-foreground mt-4 max-w-xl text-base leading-relaxed sm:mt-5 sm:text-lg">
                 Not sure what's wrong? Describe the symptoms. We'll diagnose the fault
                 free, provide a clear quote, and wait for your approval before any repair.
               </p>
-              <CtaPair className="mt-7" source="hero" />
-              <ul className="border-border text-muted-foreground mt-8 grid gap-x-6 gap-y-3 border-t pt-6 text-sm sm:grid-cols-2">
+              <CtaPair className="mt-6 sm:mt-7" source="hero" />
+              <ul className="border-border text-muted-foreground mt-6 grid grid-cols-2 gap-x-4 gap-y-3 border-t pt-5 text-xs sm:mt-8 sm:gap-x-6 sm:pt-6 sm:text-sm">
                 {trustPoints.map((p) => (
                   <li key={p.label} className="flex items-center gap-2.5">
                     <p.icon className="text-primary size-4 shrink-0" aria-hidden="true" />
@@ -132,18 +132,18 @@ function Home() {
               </ul>
             </div>
 
-            <div className="group relative min-h-[380px] overflow-hidden lg:col-span-5 lg:min-h-full">
+            <div className="group absolute inset-0 overflow-hidden lg:relative lg:col-span-5 lg:min-h-full">
               <img
                 src={heroImage}
                 alt="Technician performing precision board-level work on a PS5 motherboard"
                 width={1024}
                 height={1536}
                 fetchPriority="high"
-                className="hero-image-drift absolute inset-0 size-full object-cover object-center"
+                className="hero-image-drift absolute inset-0 size-full object-cover object-[68%_center] opacity-30 lg:object-center lg:opacity-100"
               />
               <div className="from-card absolute inset-0 bg-gradient-to-r from-card via-transparent to-transparent max-lg:hidden" />
               <div className="from-card/90 absolute inset-0 bg-gradient-to-t via-transparent to-transparent" />
-              <div className="border-border bg-card/80 absolute right-5 bottom-5 left-5 flex items-center gap-3 rounded-xl border p-3 backdrop-blur-md sm:right-7 sm:bottom-7 sm:left-7">
+              <div className="border-border bg-card/80 absolute right-5 bottom-5 left-5 hidden items-center gap-3 rounded-xl border p-3 backdrop-blur-md lg:flex">
                 <img
                   src={microsolderingImage}
                   alt="Detailed view of PS5 motherboard microsoldering"
@@ -158,7 +158,7 @@ function Home() {
                   </p>
                 </div>
               </div>
-              <div className="text-primary/70 absolute top-6 right-6 font-mono text-[10px] leading-relaxed uppercase">
+              <div className="text-primary/70 absolute top-6 right-6 hidden font-mono text-[10px] leading-relaxed uppercase lg:block">
                 No power<br />HDMI · USB<br />Microsoldering
               </div>
             </div>
