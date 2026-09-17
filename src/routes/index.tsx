@@ -13,14 +13,12 @@ import {
 import { Section, SectionHeading, Container } from "@/components/site/Section";
 import { CtaPair } from "@/components/site/Cta";
 import { ProblemCard, ServiceCard, RepairCaseCard, BeforeAfter, Card } from "@/components/site/Cards";
-import { FaqAccordion } from "@/components/site/Accordion";
 import { problems } from "@/data/problems";
 import { services, REPAIR_AVAILABILITY_NOTE } from "@/data/services";
 import { repairCases, galleryPairs } from "@/data/repairs";
-import { faqs } from "@/data/faqs";
 import { reviews } from "@/data/reviews";
 import { serviceAreaSentence, business } from "@/config/business";
-import heroImage from "@/assets/ps5-repair-hero.jpg";
+import heroImage from "@/assets/ps5-console-hero.jpg";
 import hdmiImage from "@/assets/ps5-hdmi-repair.jpg";
 import cleaningImage from "@/assets/ps5-cleaning.jpg";
 import microsolderingImage from "@/assets/ps5-microsoldering.jpg";
@@ -105,65 +103,45 @@ function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="border-border relative overflow-hidden border-b bg-card/25">
-        <div className="pointer-events-none absolute inset-0 circuit-bg opacity-60" />
-        <Container className="max-w-7xl py-4 sm:py-7 lg:py-9">
-          <div className="border-border bg-card relative grid min-h-[590px] overflow-hidden rounded-2xl border shadow-2xl lg:min-h-[540px] lg:grid-cols-12">
-            <div className="from-card via-card/95 relative z-10 flex flex-col justify-center bg-gradient-to-r to-card/55 px-6 py-8 sm:px-10 lg:col-span-7 lg:px-14 lg:py-14">
-              <p className="border-primary/25 bg-primary/10 text-primary mb-6 inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold uppercase">
-                <span className="bg-primary size-2 rounded-full" aria-hidden="true" />
-                Independent PS5 repair — UAE
-              </p>
-              <h1 className="max-w-3xl text-4xl font-bold leading-[1.04] text-balance sm:text-5xl lg:text-6xl">
-                PS5 repair service <span className="text-primary">in the UAE.</span>
-              </h1>
-              <p className="text-muted-foreground mt-4 max-w-xl text-base leading-relaxed sm:mt-5 sm:text-lg">
-                Not sure what's wrong? Describe the symptoms. We'll diagnose the fault
-                free, provide a clear quote, and wait for your approval before any repair.
-              </p>
-              <CtaPair className="mt-6 sm:mt-7" source="hero" />
-              <ul className="border-border text-muted-foreground mt-6 grid grid-cols-2 gap-x-4 gap-y-3 border-t pt-5 text-xs sm:mt-8 sm:gap-x-6 sm:pt-6 sm:text-sm">
-                {trustPoints.map((p) => (
-                  <li key={p.label} className="flex items-center gap-2.5">
-                    <p.icon className="text-primary size-4 shrink-0" aria-hidden="true" />
-                    {p.label}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="group absolute inset-0 overflow-hidden lg:relative lg:col-span-5 lg:min-h-full">
-              <img
-                src={heroImage}
-                alt="Technician performing precision board-level work on a PS5 motherboard"
-                width={1024}
-                height={1536}
-                fetchPriority="high"
-                className="hero-image-drift absolute inset-0 size-full object-cover object-[68%_center] opacity-30 lg:object-center lg:opacity-100"
-              />
-              <div className="from-card absolute inset-0 bg-gradient-to-r from-card via-transparent to-transparent max-lg:hidden" />
-              <div className="from-card/90 absolute inset-0 bg-gradient-to-t via-transparent to-transparent" />
-              <div className="border-border bg-card/80 absolute right-5 bottom-5 left-5 hidden items-center gap-3 rounded-xl border p-3 backdrop-blur-md lg:flex">
-                <img
-                  src={microsolderingImage}
-                  alt="Detailed view of PS5 motherboard microsoldering"
-                  width={1200}
-                  height={800}
-                  className="size-14 shrink-0 rounded-lg object-cover"
-                />
-                <div>
-                  <p className="text-sm font-semibold">Board-level diagnosis</p>
-                  <p className="text-muted-foreground mt-0.5 font-mono text-[11px] uppercase">
-                    Inspected first · quoted before repair
-                  </p>
-                </div>
-              </div>
-              <div className="text-primary/70 absolute top-6 right-6 hidden font-mono text-[10px] leading-relaxed uppercase lg:block">
-                No power<br />HDMI · USB<br />Microsoldering
-              </div>
-            </div>
+      <section className="border-border relative min-h-[700px] overflow-hidden border-b sm:min-h-[680px] lg:min-h-[650px]">
+        <img
+          src={heroImage}
+          alt="PS5 console and controller on a professional electronics repair bench"
+          width={1920}
+          height={1088}
+          fetchPriority="high"
+          className="hero-image-drift absolute inset-0 size-full object-cover object-[64%_center] sm:object-[60%_center] lg:object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/92 to-background/20" />
+        <div className="from-background/75 absolute inset-0 bg-gradient-to-t via-transparent to-background/20" />
+        <Container className="relative z-10 flex min-h-[700px] items-center pb-28 sm:min-h-[680px] sm:pb-24 lg:min-h-[650px]">
+          <div className="max-w-2xl pt-8 sm:pt-0">
+            <p className="border-primary/30 bg-background/55 text-primary mb-5 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold uppercase backdrop-blur-sm">
+              <span className="bg-primary size-2 rounded-full" aria-hidden="true" />
+              Independent PS5 repair — {serviceAreaSentence}
+            </p>
+            <h1 className="max-w-2xl text-4xl font-bold leading-[1.04] text-balance sm:text-5xl lg:text-7xl">
+              Your PS5 may be <span className="text-primary">repairable.</span>
+            </h1>
+            <p className="text-muted-foreground mt-5 max-w-xl text-base leading-relaxed sm:text-lg">
+              Tell us what it's doing. We'll diagnose the fault free, provide a clear
+              quote, and wait for your approval before any repair begins.
+            </p>
+            <CtaPair className="mt-7" source="hero" />
           </div>
         </Container>
+        <div className="border-border bg-background/80 absolute inset-x-0 bottom-0 border-t backdrop-blur-md">
+          <Container>
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-3 py-4 text-xs sm:grid-cols-4 sm:py-5 sm:text-sm">
+              {trustPoints.map((p) => (
+                <li key={p.label} className="flex items-center gap-2.5">
+                  <p.icon className="text-primary size-4 shrink-0" aria-hidden="true" />
+                  <span className="text-muted-foreground">{p.label}</span>
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </div>
       </section>
 
       {/* Problem selector */}
@@ -339,21 +317,6 @@ function Home() {
             ))}
           </div>
         )}
-      </Section>
-
-      {/* FAQ */}
-      <Section>
-        <SectionHeading eyebrow="FAQ" title="Common questions" />
-        <div className="mt-10">
-          <FaqAccordion items={faqs.slice(0, 8)} />
-        </div>
-        <Link
-          to="/faq"
-          className="text-primary mt-8 inline-flex items-center gap-1.5 text-sm font-medium"
-        >
-          See all questions
-          <ArrowRight className="size-4" aria-hidden="true" />
-        </Link>
       </Section>
 
       {/* Final CTA */}
