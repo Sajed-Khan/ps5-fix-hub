@@ -230,8 +230,7 @@ export function DiagnosisForm({
 
       <p className="text-muted-foreground mt-4 text-xs leading-relaxed">
         Your answers open in WhatsApp as a ready-written message. Nothing is stored on
-        this website. You can attach photos or a video of the fault directly in the
-        chat.
+        this website.
       </p>
     </form>
   );

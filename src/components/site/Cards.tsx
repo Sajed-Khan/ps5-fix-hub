@@ -3,9 +3,10 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check } from "lucide-react";
 import type { Problem } from "@/data/problems";
 import type { Service } from "@/data/services";
-import type { RepairCase, GalleryPair } from "@/data/repairs";
+import type { RepairCase, GalleryPair, RepairGallery, RepairPhoto } from "@/data/repairs";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
+import { ImageModal } from "./ImageModal";
 
 export function Card({
   children,
@@ -120,6 +121,23 @@ export function ServiceCard({ service }: { service: Service }) {
 }
 
 export function RepairCaseCard({ item }: { item: RepairCase }) {
+  const shots = [
+    item.beforeImage
+      ? {
+          src: item.beforeImage,
+          alt: item.beforeAlt ?? "Repair photo",
+          label: item.beforeLabel ?? "Before",
+        }
+      : null,
+    item.afterImage
+      ? {
+          src: item.afterImage,
+          alt: item.afterAlt ?? "Repair photo",
+          label: item.afterLabel ?? "After",
+        }
+      : null,
+  ].filter((shot): shot is { src: string; alt: string; label: string } => Boolean(shot));
+
   return (
     <Card>
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -130,6 +148,31 @@ export function RepairCaseCard({ item }: { item: RepairCase }) {
       </div>
       <h3 className="mt-3 text-base font-semibold">{item.problemTitle}</h3>
       <p className="text-muted-foreground mt-1 text-sm">{item.model}</p>
+      {shots.length > 0 ? (
+        <div className={cn("mt-4 grid gap-2", shots.length > 1 ? "grid-cols-2" : "grid-cols-1")}>
+          {shots.map((shot) => (
+            <figure key={shot.src}>
+              <ImageModal src={shot.src} alt={shot.alt}>
+                <button
+                  type="button"
+                  className="border-border block w-full cursor-zoom-in overflow-hidden rounded-xl border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  aria-label={`Open ${shot.label} image`}
+                >
+                  <img
+                    src={shot.src}
+                    alt={shot.alt}
+                    loading="lazy"
+                    className="aspect-4/3 size-full object-cover"
+                  />
+                </button>
+              </ImageModal>
+              <figcaption className="text-muted-foreground mt-1.5 text-[11px]">
+                {shot.label}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      ) : null}
       <dl className="mt-4 space-y-3 text-sm">
         {[
           ["Reported", item.reported],
@@ -169,26 +212,79 @@ export function BeforeAfter({ pair }: { pair: GalleryPair }) {
           ] as const
         ).map(([label, src, alt]) => (
           <figure key={label}>
-            <div className="border-border bg-secondary/40 circuit-bg flex aspect-4/3 items-center justify-center overflow-hidden rounded-xl border">
-              {src ? (
-                <img
-                  src={src}
-                  alt={alt}
-                  loading="lazy"
-                  className="size-full object-cover"
-                />
-              ) : (
+            {src ? (
+              <ImageModal src={src} alt={alt}>
+                <button
+                  type="button"
+                  className="border-border bg-secondary/40 circuit-bg flex aspect-4/3 w-full cursor-zoom-in items-center justify-center overflow-hidden rounded-xl border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  aria-label={`Open ${label} image`}
+                >
+                  <img
+                    src={src}
+                    alt={alt}
+                    loading="lazy"
+                    className="size-full object-cover"
+                  />
+                </button>
+              </ImageModal>
+            ) : (
+              <div className="border-border bg-secondary/40 circuit-bg flex aspect-4/3 items-center justify-center overflow-hidden rounded-xl border">
                 <span className="text-muted-foreground px-3 text-center text-[11px]">
                   Photo coming soon
                 </span>
-              )}
-            </div>
+              </div>
+            )}
             <figcaption className="text-muted-foreground mt-2 text-xs">
               {label}
             </figcaption>
           </figure>
         ))}
       </div>
+    </Card>
+  );
+}
+
+export function RepairPhotoGrid({ photos }: { photos: RepairPhoto[] }) {
+  return (
+    <div
+      className={cn(
+        "mt-4 grid gap-3",
+        photos.length === 1 ? "grid-cols-1 sm:max-w-md" : "grid-cols-2 lg:grid-cols-4",
+      )}
+    >
+      {photos.map((photo) => (
+        <figure key={photo.src}>
+          <ImageModal src={photo.src} alt={photo.alt}>
+            <button
+              type="button"
+              className="border-border block w-full cursor-zoom-in overflow-hidden rounded-xl border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              aria-label={`Open ${photo.caption} image`}
+            >
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                loading="lazy"
+                className="aspect-4/3 size-full object-cover"
+              />
+            </button>
+          </ImageModal>
+          <figcaption className="text-muted-foreground mt-1.5 text-xs leading-snug">
+            {photo.caption}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  );
+}
+
+export function RepairGalleryBlock({ gallery }: { gallery: RepairGallery }) {
+  return (
+    <Card>
+      <h3 className="text-base font-semibold">{gallery.title}</h3>
+      <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
+        {gallery.description}
+      </p>
+      <RepairPhotoGrid photos={gallery.photos} />
     </Card>
   );
 }

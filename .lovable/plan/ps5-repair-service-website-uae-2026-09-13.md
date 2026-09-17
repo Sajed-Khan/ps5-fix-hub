@@ -9,7 +9,7 @@ The brief asks for Next.js. This platform builds on a very similar React framewo
 ## Business details used
 
 - WhatsApp / phone: +971 56 954 2265
-- Email: leon.khan.3200@gmail.com
+- Email: sajed619007@gmail.com
 - Hours: 24/7
 - Service areas: Ajman, Sharjah, Dubai
 - No collection, delivery or public drop-off address — the site will not show a location or claim one

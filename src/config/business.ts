@@ -19,9 +19,9 @@ export const business = {
   /** Display + tel: link */
   phone: "+971 56 954 2265",
   phoneHref: "+971569542265",
-  email: "leon.khan.3200@gmail.com",
+  email: "sajed619007@gmail.com",
 
-  businessHours: "24/7 — messages answered any time",
+  businessHours: "We usually reply within a few hours.",
 
   /** No public workshop address. Leave empty unless a real one exists. */
   address: "",

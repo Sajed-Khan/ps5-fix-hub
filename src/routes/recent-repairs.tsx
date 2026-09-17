@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/Layout";
 import { Section, SectionHeading } from "@/components/site/Section";
 import { CtaPair } from "@/components/site/Cta";
-import { RepairCaseCard, BeforeAfter } from "@/components/site/Cards";
-import { repairCases, galleryPairs } from "@/data/repairs";
+import { RepairCaseCard, RepairGalleryBlock } from "@/components/site/Cards";
+import { repairCases, repairGalleries } from "@/data/repairs";
 
 export const Route = createFileRoute("/recent-repairs")({
   head: () => ({
@@ -12,13 +12,13 @@ export const Route = createFileRoute("/recent-repairs")({
       {
         name: "description",
         content:
-          "How we document each PS5 repair: reported fault, diagnosis, repair carried out and result. Real cases are added as they're completed.",
+          "How we document each PS5 repair: reported fault, diagnosis, repair carried out and result. Workshop photos grouped by the job — southbridge, SSD controller, RAM, and more.",
       },
-      { property: "og:title", content: "Recent PS5 Repairs & Before/After Examples" },
+      { property: "og:title", content: "Recent PS5 Repairs & Workshop Photos" },
       {
         property: "og:description",
         content:
-          "Clearly documented PS5 repair cases — reported fault, diagnosis, repair and result.",
+          "Documented PS5 repair cases — reported fault, diagnosis, repair and result — with workshop photos for each job.",
       },
     ],
   }),
@@ -31,7 +31,7 @@ function RecentRepairs() {
       <PageHero
         eyebrow="Recent repairs"
         title="Repair cases, documented honestly"
-        description="We're a new service, so rather than pad this page out we show exactly how each repair is recorded. Every entry below is a clearly labelled example, and real cases replace them as they're completed."
+        description="Each case below is a completed job from the bench: what was reported, what we found, what was repaired, and the result. Workshop photos for every job sit underneath."
       >
         <CtaPair source="recent_repairs_hero" />
       </PageHero>
@@ -47,12 +47,12 @@ function RecentRepairs() {
 
       <Section tone="raised">
         <SectionHeading
-          title="Before & after"
-          description="Photo placeholders for now — real repair photos slot straight into these layouts."
+          title="Workshop photos"
+          description="Photos grouped by the repair — for example every SSD controller shot sits together under that job, rather than as a before-and-after pair."
         />
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          {galleryPairs.map((pair) => (
-            <BeforeAfter key={pair.id} pair={pair} />
+        <div className="mt-8 space-y-4">
+          {repairGalleries.map((gallery) => (
+            <RepairGalleryBlock key={gallery.id} gallery={gallery} />
           ))}
         </div>
       </Section>

@@ -12,14 +12,15 @@ import {
 } from "lucide-react";
 import { Section, SectionHeading, Container } from "@/components/site/Section";
 import { CtaPair } from "@/components/site/Cta";
-import { ProblemCard, ServiceCard, RepairCaseCard, BeforeAfter, Card } from "@/components/site/Cards";
+import { ProblemCard, RepairCaseCard, BeforeAfter, Card } from "@/components/site/Cards";
+import { ImageModal } from "@/components/site/ImageModal";
 import { problems } from "@/data/problems";
-import { services, REPAIR_AVAILABILITY_NOTE } from "@/data/services";
+import { REPAIR_AVAILABILITY_NOTE } from "@/data/services";
 import { repairCases, galleryPairs } from "@/data/repairs";
 import { reviews } from "@/data/reviews";
 import { serviceAreaSentence, business } from "@/config/business";
 import heroImage from "@/assets/ps5-console-hero.jpg";
-import hdmiImage from "@/assets/ps5-hdmi-repair.jpg";
+import hdmiImage from "../../public/RAM chip reballing.jpeg";
 import cleaningImage from "@/assets/ps5-cleaning.jpg";
 import microsolderingImage from "@/assets/ps5-microsoldering.jpg";
 
@@ -81,9 +82,9 @@ const steps = [
 const repairHighlights = [
   {
     src: hdmiImage,
-    title: "HDMI port work",
-    detail: "Inspected under magnification",
-    alt: "Close-up of a PS5 HDMI port on a motherboard at a repair bench",
+    title: "Chip Reballing",
+    detail: "Reballing the RAM chip",
+    alt: "Technician reballing the RAM chip on a PS5 motherboard",
   },
   {
     src: microsolderingImage,
@@ -132,7 +133,7 @@ function Home() {
         </Container>
         <div className="border-border bg-background/80 absolute inset-x-0 bottom-0 border-t backdrop-blur-md">
           <Container>
-            <ul className="grid grid-cols-2 gap-x-4 gap-y-3 py-4 text-xs sm:grid-cols-4 sm:py-5 sm:text-sm">
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-3 py-4 text-xs sm:flex sm:items-center sm:justify-between sm:gap-4 sm:py-5 sm:text-sm">
               {trustPoints.map((p) => (
                 <li key={p.label} className="flex items-center gap-2.5">
                   <p.icon className="text-primary size-4 shrink-0" aria-hidden="true" />
@@ -168,26 +169,36 @@ function Home() {
         <div className="mt-8 grid gap-3 sm:grid-cols-3">
           {repairHighlights.map((item) => (
             <figure key={item.title} className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-border">
-              <img
-                src={item.src}
-                alt={item.alt}
-                width={1200}
-                height={800}
-                loading="lazy"
-                className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-              />
-              <figcaption className="from-background/95 absolute inset-x-0 bottom-0 bg-gradient-to-t to-transparent px-4 pt-12 pb-4">
-                <span className="block text-sm font-semibold">{item.title}</span>
-                <span className="text-muted-foreground mt-0.5 block text-xs">{item.detail}</span>
-              </figcaption>
+              <ImageModal src={item.src} alt={item.alt}>
+                <button
+                  type="button"
+                  className="size-full cursor-zoom-in text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+                  aria-label={`Open ${item.title} image`}
+                >
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    width={1200}
+                    height={800}
+                    loading="lazy"
+                    className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                  <span className="from-background/95 absolute inset-x-0 bottom-0 bg-gradient-to-t to-transparent px-4 pt-12 pb-4">
+                    <span className="block text-sm font-semibold">{item.title}</span>
+                    <span className="text-muted-foreground mt-0.5 block text-xs">{item.detail}</span>
+                  </span>
+                </button>
+              </ImageModal>
             </figure>
           ))}
         </div>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((s) => (
-            <ServiceCard key={s.title} service={s} />
-          ))}
-        </div>
+        <Link
+          to="/repairs"
+          className="text-primary mt-8 inline-flex items-center gap-1.5 text-sm font-medium"
+        >
+          View all services
+          <ArrowRight className="size-4" aria-hidden="true" />
+        </Link>
       </Section>
 
       {/* Free diagnosis */}
@@ -243,14 +254,21 @@ function Home() {
       <Section>
         <SectionHeading
           eyebrow="Recent repairs"
-          title="Examples of the work"
-          description="We're a new service building up our public repair history. The cases below are clearly labelled examples of how each repair is documented — real cases replace them as they're completed."
+          title="Case examples"
+          description="Documented board-level work from the bench: reported fault, diagnosis, the repair carried out, and the result — with photos from each job."
         />
         <div className="mt-10 grid gap-4 lg:grid-cols-3">
-          {repairCases.map((c) => (
+          {repairCases.slice(0, 3).map((c) => (
             <RepairCaseCard key={c.reference} item={c} />
           ))}
         </div>
+        <Link
+          to="/recent-repairs"
+          className="text-primary mt-8 inline-flex items-center gap-1.5 text-sm font-medium"
+        >
+          View all examples
+          <ArrowRight className="size-4" aria-hidden="true" />
+        </Link>
       </Section>
 
       {/* Before & after */}
@@ -258,13 +276,20 @@ function Home() {
         <SectionHeading
           eyebrow="Before & after"
           title="Before and after gallery"
-          description="Photo placeholders for now — real repair photos drop straight into these layouts."
+          description="The same jobs at two stages — chip out versus reball complete, pads cleaned versus controller seated, and diagnosis versus the next step on the bench."
         />
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
-          {galleryPairs.map((pair) => (
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {galleryPairs.slice(0, 3).map((pair) => (
             <BeforeAfter key={pair.id} pair={pair} />
           ))}
         </div>
+        <Link
+          to="/recent-repairs"
+          className="text-primary mt-8 inline-flex items-center gap-1.5 text-sm font-medium"
+        >
+          View all images
+          <ArrowRight className="size-4" aria-hidden="true" />
+        </Link>
       </Section>
 
       {/* Straightforward process / promises */}
