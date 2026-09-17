@@ -20,7 +20,7 @@ import { repairCases, galleryPairs } from "@/data/repairs";
 import { reviews } from "@/data/reviews";
 import { serviceAreaSentence, business } from "@/config/business";
 import heroImage from "@/assets/ps5-console-hero.jpg";
-import hdmiImage from "../../public/RAM chip reballing.jpeg";
+import hdmiImage from "@/assets/ram-chip-reballing.jpeg";
 import cleaningImage from "@/assets/ps5-cleaning.jpg";
 import microsolderingImage from "@/assets/ps5-microsoldering.jpg";
 
