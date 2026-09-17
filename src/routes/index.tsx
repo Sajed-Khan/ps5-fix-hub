@@ -106,11 +106,11 @@ function Home() {
       <section className="border-border relative min-h-[700px] overflow-hidden border-b sm:min-h-[680px] lg:min-h-[650px]">
         <img
           src={heroImage}
-          alt="PS5 console and controller on a professional electronics repair bench"
+          alt="White PS5 console standing next to a DualSense wireless controller"
           width={1920}
           height={1088}
           fetchPriority="high"
-          className="hero-image-drift absolute inset-0 size-full object-cover object-[64%_center] sm:object-[60%_center] lg:object-center"
+          className="hero-image-drift absolute inset-0 size-full object-cover object-[68%_center] sm:object-[64%_center] lg:object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/92 to-background/20" />
         <div className="from-background/75 absolute inset-0 bg-gradient-to-t via-transparent to-background/20" />
