@@ -47,7 +47,9 @@ export type RepairCase = {
 };
 
 export function publicPhoto(filename: string) {
-  return `/${encodeURIComponent(filename)}`;
+  // Vite serves public assets from the configured base path. This matters on
+  // GitHub Pages, where the site lives under `/ps5-fix-hub/` rather than `/`.
+  return `${import.meta.env.BASE_URL}${encodeURIComponent(filename)}`;
 }
 
 function photo(filename: string, caption: string, alt = caption): RepairPhoto {
